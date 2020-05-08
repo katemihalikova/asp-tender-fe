@@ -1,12 +1,14 @@
 import { Pozice, Pobocka, Uchazec } from "./interfaces";
 
+const API_URL = "http://localhost:5000/api";
+
 export async function getPobocky(): Promise<Pobocka[]> {
-  let response = await fetch(`http://www.mocky.io/v2/5eb3dac00e000053000816cd`);
+  let response = await fetch(`${API_URL}/Workplaces`);
   return await response.json();
 };
 
 export async function getPozice(pobocka: Pobocka): Promise<Pozice[]> {
-  let response = await fetch(`http://www.mocky.io/v2/5eb3dac00e000053000816cd?pobocka=${pobocka.id}`);
+  let response = await fetch(`${API_URL}/Positions?workplaceID=${pobocka.id}`);
   return await response.json();
 }
 
