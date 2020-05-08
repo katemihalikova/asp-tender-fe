@@ -3,6 +3,7 @@ import PobockaInput from './PobockaInput';
 import PoziceInput from './PoziceInput';
 import UchazecInput from './UchazecInput';
 import { Pobocka, Pozice, Uchazec } from './interfaces';
+import { upload } from './fetch-service';
 
 interface State {
   pobocka?: Pobocka;
@@ -25,7 +26,16 @@ export default class Form extends React.Component<{}, State> {
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Form submitted.");
+    this.upload();
+  }
+
+  private async upload() {
+    try {
+      await upload(this.state.pozice!, this.state.uchazec!);
+      alert("Úspěšně odesláno, děkujeme!");
+    } catch (e) {
+      console.error("Error when uploading data:", e);
+    }
   }
 
   render() {
