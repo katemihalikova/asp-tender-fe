@@ -4,7 +4,8 @@ import { Pobocka, Pozice } from './interfaces';
 
 interface Props {
   pobocka?: Pobocka;
-  onChange?: (value?: Pozice) => void
+  onChange?: (value?: Pozice) => void;
+  disabled: boolean;
 }
 interface State {
   data?: Pozice[];
@@ -22,6 +23,7 @@ export default class extends React.Component<Props, State> {
         disabled: true,
         data: [],
       });
+      this.props.onChange?.(undefined);
       if (this.props.pobocka) {
         this.loadPozice(this.props.pobocka);
       }
@@ -39,8 +41,8 @@ export default class extends React.Component<Props, State> {
     }
   }
 
-  handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    let poziceId = Number(event.currentTarget.value);
+  handleChange = ({currentTarget: {value}}: React.ChangeEvent<HTMLSelectElement>) => {
+    let poziceId = Number(value);
     let pozice = this.state.data?.find(pozice => pozice.id === poziceId);
     this.props.onChange?.(pozice);
   }
@@ -49,7 +51,7 @@ export default class extends React.Component<Props, State> {
     return (
       <div className="form-group">
         <label htmlFor="pozice">Pozice</label>
-        <select onChange={this.handleChange} className="form-control" id="pozice">
+        <select onChange={this.handleChange} className="form-control" id="pozice" disabled={this.props.disabled}>
           <option>Vyberte pozici...</option>
           {this.state.data?.map(pozice => <option key={pozice.id} value={pozice.id}>{pozice.name}</option>)}
         </select>

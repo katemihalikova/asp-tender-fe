@@ -3,7 +3,7 @@ import { getPobocky } from './fetch-service';
 import { Pobocka } from './interfaces';
 
 interface Props {
-  onChange?: (value?: Pobocka) => void
+  onChange?: (value?: Pobocka) => void;
 }
 interface State {
   data?: Pobocka[];
@@ -26,8 +26,8 @@ export default class extends React.Component<Props, State> {
     }
   }
 
-  handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    let pobockaId = Number(event.currentTarget.value);
+  handleChange = ({currentTarget: {value}}: React.ChangeEvent<HTMLSelectElement>) => {
+    let pobockaId = Number(value);
     let pobocka = this.state.data?.find(pobocka => pobocka.id === pobockaId);
     this.props.onChange?.(pobocka);
   }
