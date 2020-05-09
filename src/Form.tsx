@@ -33,6 +33,7 @@ export default class Form extends React.Component<{}, State> {
     try {
       await upload(this.state.pozice!, this.state.uchazec!);
       alert("Úspěšně odesláno, děkujeme!");
+      window.location.reload();
     } catch (e) {
       console.error("Error when uploading data:", e);
     }
