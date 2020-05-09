@@ -14,12 +14,13 @@ export async function getPozice(pobocka: Pobocka): Promise<Pozice[]> {
 
 export async function upload(pozice: Pozice, data: Uchazec) {
   let body = new FormData();
+  body.append("positionId", String(pozice.id));
   body.append("text", data.text);
   body.append("email", data.email);
   body.append("phone", data.phone);
   body.append("cv", data.cv);
 
-  return await fetch(`http://www.mocky.io/v2/5eb53b4d31000057006993f1?pozice=${pozice.id}`, {
+  return await fetch(`${API_URL}/JobApplications`, {
     method: 'POST',
     body,
   });
