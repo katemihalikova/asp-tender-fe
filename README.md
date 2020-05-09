@@ -1,3 +1,19 @@
+# ASP EF #2 - Tender Frontend
+
+## Run
+
+Backend is expected to run at <http://localhost:5000>.
+
+Then, run:
+
+```sh
+npm start
+```
+
+By default, the app runs at <http://localhost:3000>.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
